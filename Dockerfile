@@ -12,6 +12,8 @@ WORKDIR /usr/share/nginx/html
 
 COPY --from=build /app/dist/cursos-front/browser ./
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
+COPY nginx/04-normalize-backend-url.sh /docker-entrypoint.d/04-normalize-backend-url.sh
+RUN chmod +x /docker-entrypoint.d/04-normalize-backend-url.sh
 
 ENV PORT=80
 ENV BACKEND_URL=http://backend:8080
